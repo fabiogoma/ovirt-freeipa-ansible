@@ -1,0 +1,17 @@
+---
+
+- name: This is a hello-world example
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Debug
+      debug:
+        msg: "{{ item }}"
+      loop:
+        - "{{ oVirt.username }}"
+        - "{{ oVirt.password }}"
+        - "{{ FreeIPA.username }}"
+        - "{{ FreeIPA.password }}"
