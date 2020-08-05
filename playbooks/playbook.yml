@@ -14,32 +14,32 @@
         password: "{{ oVirt.password }}"
 
   tasks:
-  - name: Run VM with cloud init
-    ovirt_vm:
-      auth: "{{ ovirt_auth }}"
-      name: teste
-      template: CentOS7
-      cluster: Default
-      instance_type: Small
-      cloud_init:
-        nic_boot_protocol: dhcp
-        dns_search: europe.intranet
-        dns_servers:
-          - 192.168.1.100
-        nic_name: eth0
-        nic_on_boot: true
-        host_name: teste.europe.intranet
-        custom_script: |
-          runcmd:
-            - yum update -y
-        user_name: root
-        root_password: "{{ oVirt.password }}"
+    - name: Run VM with cloud init
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        name: teste
+        template: CentOS7
+        cluster: Default
+        instance_type: Small
+        cloud_init:
+          nic_boot_protocol: dhcp
+          dns_search: europe.intranet
+          dns_servers:
+            - 192.168.1.100
+          nic_name: eth0
+          nic_on_boot: true
+          host_name: teste.europe.intranet
+          custom_script: |
+            runcmd:
+              - yum update -y
+          user_name: root
+          root_password: "{{ oVirt.password }}"
 
-  - name: Migrate/Run VM to/on host named 'host1'
-    ovirt_vm:
-      auth: "{{ ovirt_auth }}"
-      state: running
-      name: teste
+    - name: Migrate/Run VM to/on host named 'host1'
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        state: running
+        name: teste
 
   post_tasks:
     - name: Logout from oVirt
